@@ -1,0 +1,28 @@
+<configuration>
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} %-5level %class : %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="SQL-METRICS" class="ch.qos.logback.core.FileAppender">
+		<file>../metricas-sql/substituir.sql</file>
+		<append>false</append>
+		<encoder>
+			<pattern>--- %msg%n</pattern>
+		</encoder>
+	</appender>
+
+    <logger name="org.hibernate.SQL" level="DEBUG" additivity="false">
+        <appender-ref ref="SQL-METRICS"/>
+    </logger>
+    
+    <logger name="br.gov.sp.prodesp.substituir.controller" level="INFO" additivity="false">
+        <appender-ref ref="SQL-METRICS"/>
+    </logger>
+    
+	<root level="INFO">
+		<appender-ref ref="STDOUT" />
+	</root>
+</configuration>
